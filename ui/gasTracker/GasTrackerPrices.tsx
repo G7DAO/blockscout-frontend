@@ -3,6 +3,8 @@ import React from 'react';
 
 import type { GasPrices } from 'types/api/stats';
 
+import colors from 'theme/foundations/colors';
+
 import GasTrackerPriceSnippet from './GasTrackerPriceSnippet';
 
 interface Props {
@@ -11,14 +13,14 @@ interface Props {
 }
 
 const GasTrackerPrices = ({ prices, isLoading }: Props) => {
-  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.300');
+  const borderColor = useColorModeValue('gray.200', colors.grayTrue[700]);
 
   return (
     <Flex
       as="ul"
       flexDir={{ base: 'column', lg: 'row' }}
       borderColor={ borderColor }
-      borderWidth="2px"
+      borderWidth="1px"
       borderRadius="xl"
       overflow="hidden"
     >

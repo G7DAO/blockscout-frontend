@@ -4,6 +4,7 @@ import React from 'react';
 import config from 'configs/app';
 import useApiQuery from 'lib/api/useApiQuery';
 import { HOMEPAGE_STATS } from 'stubs/stats';
+import colors from 'theme/foundations/colors';
 import Hint from 'ui/shared/Hint';
 import IconSvg from 'ui/shared/IconSvg';
 
@@ -38,7 +39,7 @@ const ChainIndicators = () => {
     },
   });
 
-  const bgColor = useColorModeValue('gray.50', 'whiteAlpha.100');
+  const bgColor = useColorModeValue('gray.50', colors.grayTrue[800]);
 
   if (indicators.length === 0) {
     return null;
@@ -54,7 +55,7 @@ const ChainIndicators = () => {
     }
 
     return (
-      <Text fontWeight={ 700 } fontSize="30px" lineHeight="36px">
+      <Text fontWeight={ 700 } fontSize="36px" lineHeight="44px">
         { indicator?.value(statsQueryResult.data) }
       </Text>
     );
@@ -70,7 +71,7 @@ const ChainIndicators = () => {
       return null;
     }
 
-    const diffColor = diff >= 0 ? 'green.500' : 'red.500';
+    const diffColor = diff >= 0 ? colors.success[500] : colors.error[500];
 
     return (
       <Skeleton isLoaded={ !statsQueryResult.isPlaceholderData } display="flex" alignItems="center" color={ diffColor } ml={ 2 }>
@@ -94,7 +95,7 @@ const ChainIndicators = () => {
     >
       <Flex flexGrow={ 1 } flexDir="column">
         <Flex alignItems="center">
-          <Text fontWeight={ 500 }>{ indicator?.title }</Text>
+          <Text fontWeight={ 500 } color={ colors.grayTrue[200] }>{ indicator?.title }</Text>
           { indicator?.hint && <Hint label={ indicator.hint } ml={ 1 }/> }
         </Flex>
         <Flex mb={{ base: 0, lg: 2 }} mt={ 1 } alignItems="end">

@@ -46,7 +46,7 @@ const LinkExternal = ({ href, children, className, isLoading, variant, iconColor
   return (
     <Link className={ className } { ...styleProps } target="_blank" href={ href } onClick={ onClick }>
       { children }
-      <IconSvg name="link_external" boxSize={ 3 } verticalAlign="middle" color={ iconColor ?? 'icon_link_external' } flexShrink={ 0 }/>
+      <IconSvg name="link_external" boxSize={ 4 } verticalAlign="middle" color={ iconColor ?? 'white' } flexShrink={ 0 }/>
     </Link>
   );
 };

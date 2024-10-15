@@ -6,6 +6,7 @@ import type { HomeStats } from 'types/api/stats';
 import type { ChainIndicatorId } from 'types/homepage';
 
 import type { ResourceError } from 'lib/api/resources';
+import colors from 'theme/foundations/colors';
 
 interface Props {
   id: ChainIndicatorId;
@@ -47,7 +48,7 @@ const ChainIndicatorItem = ({ id, title, value, valueDiff, icon, isSelected, onC
       return null;
     }
 
-    const diffColor = diff >= 0 ? 'green.500' : 'red.500';
+    const diffColor = diff >= 0 ? colors.success[500] : colors.error[500];
 
     return (
       <Skeleton isLoaded={ !stats.isPlaceholderData } ml={ 1 } display="flex" alignItems="center" color={ diffColor }>

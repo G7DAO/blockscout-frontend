@@ -14,6 +14,7 @@ import type { TimeChartItem } from './types';
 import { route, type Route } from 'nextjs-routes';
 
 import config from 'configs/app';
+import colors from 'theme/foundations/colors';
 import IconSvg from 'ui/shared/IconSvg';
 
 import ChartMenu from './ChartMenu';
@@ -48,7 +49,7 @@ const ChartWidget = ({
   const ref = useRef<HTMLDivElement>(null);
   const { zoomRange, handleZoom, handleZoomReset } = useZoom();
 
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const borderColor = useColorModeValue('gray.200', colors.grayTrue[200]); //'gray.600'
 
   const hasItems = items && items.length > 2;
 

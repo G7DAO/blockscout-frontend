@@ -19,6 +19,7 @@ import getNetworkValidationActionText from 'lib/networks/getNetworkValidationAct
 import getNetworkValidatorTitle from 'lib/networks/getNetworkValidatorTitle';
 import getQueryParamString from 'lib/router/getQueryParamString';
 import { currencyUnits } from 'lib/units';
+import colors from 'theme/foundations/colors';
 import OptimisticL2TxnBatchDA from 'ui/shared/batch/OptimisticL2TxnBatchDA';
 import BlockGasUsed from 'ui/shared/block/BlockGasUsed';
 import CopyToClipboard from 'ui/shared/CopyToClipboard';
@@ -502,7 +503,7 @@ const BlockDetails = ({ query }: Props) => {
             Burnt fees
           </DetailsInfoItem.Label>
           <DetailsInfoItem.Value>
-            <IconSvg name="flame" boxSize={ 5 } color="gray.500" isLoading={ isPlaceholderData }/>
+            <IconSvg name="flame" boxSize={ 5 } color={ colors.grayTrue[200] } isLoading={ isPlaceholderData }/>
             <Skeleton isLoaded={ !isPlaceholderData } ml={ 2 }>
               { burntFees.dividedBy(WEI).toFixed() } { currencyUnits.ether }
             </Skeleton>

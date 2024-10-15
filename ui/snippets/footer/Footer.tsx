@@ -1,5 +1,5 @@
 import type { GridProps, HTMLChakraProps } from '@chakra-ui/react';
-import { Box, Grid, Flex, Text, Link, VStack, Skeleton, useColorModeValue } from '@chakra-ui/react';
+import { Box, Grid, Flex, Text, Link, VStack, Skeleton } from '@chakra-ui/react'; //useColorModeValue
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
@@ -11,6 +11,7 @@ import useApiQuery from 'lib/api/useApiQuery';
 import useFetch from 'lib/hooks/useFetch';
 import useIssueUrl from 'lib/hooks/useIssueUrl';
 import { copy } from 'lib/html-entities';
+import colors from 'theme/foundations/colors';
 import IconSvg from 'ui/shared/IconSvg';
 import { CONTENT_MAX_WIDTH } from 'ui/shared/layout/utils';
 import NetworkAddToWallet from 'ui/shared/NetworkAddToWallet';
@@ -33,12 +34,12 @@ const Footer = () => {
   });
   const apiVersionUrl = getApiVersionUrl(backendVersionData?.backend_version);
   const issueUrl = useIssueUrl(backendVersionData?.backend_version);
-  const logoColor = useColorModeValue('blue.600', 'white');
+  // const logoColor = useColorModeValue('blue.600', 'white');
 
   const BLOCKSCOUT_LINKS = [
     {
       icon: 'edit' as const,
-      iconSize: '16px',
+      iconSize: '20px',
       text: 'Submit an issue',
       url: issueUrl,
     },
@@ -50,19 +51,19 @@ const Footer = () => {
     },
     {
       icon: 'social/git' as const,
-      iconSize: '18px',
+      iconSize: '20px',
       text: 'Contribute',
       url: 'https://github.com/blockscout/blockscout',
     },
     {
       icon: 'social/twitter' as const,
-      iconSize: '18px',
+      iconSize: '20px',
       text: 'X (ex-Twitter)',
       url: 'https://www.twitter.com/blockscoutcom',
     },
     {
       icon: 'social/discord' as const,
-      iconSize: '24px',
+      iconSize: '20px',
       text: 'Discord',
       url: 'https://discord.gg/blockscout',
     },
@@ -82,7 +83,10 @@ const Footer = () => {
 
   const frontendLink = (() => {
     if (config.UI.footer.frontendVersion) {
-      return <Link href={ FRONT_VERSION_URL } target="_blank">{ config.UI.footer.frontendVersion }</Link>;
+      return (
+        <Link color={ colors.grayTrue[200] } _hover={{ color: 'white' }}
+          href={ FRONT_VERSION_URL } target="_blank">{ config.UI.footer.frontendVersion }</Link>
+      );
     }
 
     if (config.UI.footer.frontendCommit) {
@@ -125,7 +129,7 @@ const Footer = () => {
       <Box gridArea={ gridArea }>
         <Flex columnGap={ 2 } fontSize="xs" lineHeight={ 5 } alignItems="center" color="text">
           <span>Made with</span>
-          <Link href="https://www.blockscout.com" isExternal display="inline-flex" color={ logoColor } _hover={{ color: logoColor }}>
+          <Link href="https://www.blockscout.com" isExternal display="inline-flex" color={ colors.grayTrue[200] } _hover={{ color: 'white' }}>
             <IconSvg
               name="networks/logo-placeholder"
               width="80px"
@@ -139,7 +143,9 @@ const Footer = () => {
         <Box mt={ 6 } alignItems="start" fontSize="xs" lineHeight={ 5 }>
           { apiVersionUrl && (
             <Text>
-              Backend: <Link href={ apiVersionUrl } target="_blank">{ backendVersionData?.backend_version }</Link>
+              Backend: <Link color={ colors.grayTrue[200] } _hover={{ color: 'white' }}
+                href={ apiVersionUrl } target="_blank">{ backendVersionData?.backend_version }
+              </Link>
             </Text>
           ) }
           { frontendLink && (
@@ -153,7 +159,7 @@ const Footer = () => {
         </Box>
       </Box>
     );
-  }, [ apiVersionUrl, backendVersionData?.backend_version, frontendLink, logoColor ]);
+  }, [ apiVersionUrl, backendVersionData?.backend_version, frontendLink ]); //logoColor
 
   const containerProps: HTMLChakraProps<'div'> = {
     as: 'footer',

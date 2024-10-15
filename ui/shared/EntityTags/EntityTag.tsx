@@ -4,6 +4,7 @@ import React from 'react';
 
 import type { EntityTag as TEntityTag } from './types';
 
+import colors from 'theme/foundations/colors';
 import IconSvg from 'ui/shared/IconSvg';
 import TruncatedValue from 'ui/shared/TruncatedValue';
 
@@ -25,7 +26,7 @@ const EntityTag = ({ data, isLoading, maxW, noLink }: Props) => {
   }
 
   const hasLink = !noLink && Boolean(getTagLinkParams(data));
-  const iconColor = data.meta?.textColor ?? 'gray.400';
+  const iconColor = data.meta?.textColor ?? colors.grayTrue[200];
 
   const name = (() => {
     if (data.meta?.warpcastHandle) {

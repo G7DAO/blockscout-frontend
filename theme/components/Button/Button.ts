@@ -3,15 +3,30 @@ import { mode } from '@chakra-ui/theme-tools';
 import { runIfFn } from '@chakra-ui/utils';
 
 import config from 'configs/app';
+import colors from 'theme/foundations/colors';
 
 const variantSolid = defineStyle((props) => {
   const { colorScheme: c } = props;
 
-  const bg = `${ c }.600`;
+  const bg = `${ c }.500`;
   const color = 'white';
-  const hoverBg = `${ c }.400`;
+  const hoverBg = `${ c }.600`;
   const activeBg = hoverBg;
 
+  if (c === 'red' || c === 'blue' || c === 'gray') { //for the Verify&Publsih button on the Verify contract page
+    return {
+      bg: mode('blackAlpha.200', colors.error[500])(props),
+      color: mode('blackAlpha.800', 'white')(props),
+      _hover: {
+        bg: colors.error[600],
+        color: color,
+        _disabled: {
+          bg,
+        },
+        _active: { bg: colors.error[600] },
+      },
+    };
+  }
   return {
     bg,
     color,
@@ -38,46 +53,47 @@ const variantOutline = defineStyle((props) => {
 
   const bg = 'transparent';
 
-  const color = isGrayTheme ? mode('blackAlpha.800', 'whiteAlpha.800')(props) : mode(`${ c }.600`, `${ c }.300`)(props);
-  const borderColor = isGrayTheme ? mode('gray.200', 'gray.600')(props) : mode(`${ c }.600`, `${ c }.300`)(props);
+  const color = isGrayTheme ? mode('blackAlpha.800', colors.grayTrue[200])(props) : mode(`${ c }.600`, colors.grayTrue[200])(props);
+  const borderColor = isGrayTheme ? mode('gray.200', colors.grayTrue[700])(props) : mode(`${ c }.600`, colors.grayTrue[700])(props);
 
-  const selectedBg = isGrayTheme ? mode('blue.50', 'gray.600')(props) : mode(`${ c }.50`, 'gray.600')(props);
-  const selectedColor = mode('blue.600', 'gray.50')(props);
+  const selectedBg = isGrayTheme ? mode('blue.50', colors.grayTrue[700])(props) : mode(`${ c }.50`, colors.grayTrue[700])(props);
+  const selectedColor = mode('blue.600', colors.grayTrue[50])(props);
 
   return {
     color,
     fontWeight: props.fontWeight || 600,
-    borderWidth: props.borderWidth || '2px',
+    borderWidth: props.borderWidth || '1px',
     borderStyle: 'solid',
     borderColor,
     bg,
     _hover: {
-      color: 'link_hovered',
-      borderColor: 'link_hovered',
+      color: 'white', //'link_hovered',
+      borderColor: 'white', //'link_hovered',
       bg,
       span: {
-        color: 'link_hovered',
+        color: 'white', //'link_hovered',
       },
       _disabled: {
-        color,
+        color: colors.grayTrue[500],
         borderColor,
       },
     },
     _disabled: {
-      opacity: 0.2,
+      color: colors.grayTrue[500],
+      opacity: 1,
     },
     // According to design there is no "active" or "pressed" state
     // It is simply should be the same as the "hover" state
     _active: {
-      color: 'link_hovered',
-      borderColor: 'link_hovered',
+      color: 'white', //'link_hovered',
+      borderColor: 'white', //'link_hovered',
       bg,
       span: {
-        color: 'link_hovered',
+        color: 'white', //'link_hovered',
       },
       _disabled: {
-        color: 'link_hovered',
-        borderColor: 'link_hovered',
+        color: 'white', //'link_hovered',
+        borderColor: 'white', //'link_hovered',
       },
     },
     // We have a special state for this button variant that serves as a popover trigger.
@@ -111,16 +127,16 @@ const variantGhost = defineStyle((props) => {
 
   return {
     bg: 'transparent',
-    color: mode(`${ c }.700`, 'gray.400')(props),
+    color: mode(`${ c }.700`, colors.grayTrue[200])(props),
     _active: {
-      color: mode(`${ c }.700`, 'gray.50')(props),
-      bg: mode(`${ c }.50`, 'gray.800')(props),
+      color: mode(`${ c }.700`, colors.grayTrue[50])(props),
+      bg: mode(`${ c }.50`, colors.grayTrue[800])(props),
     },
     _hover: {
       color: `${ c }.400`,
       _active: {
         bg: props.isActive ? activeBg : 'transparent',
-        color: mode(`${ c }.700`, 'gray.50')(props),
+        color: mode(`${ c }.700`, colors.grayTrue[50])(props),
       },
     },
   };
@@ -157,30 +173,30 @@ const variantHero = defineStyle((props) => {
   return {
     bg: mode(
       config.UI.homepage.heroBanner?.button?._default?.background?.[0] || 'blue.600',
-      config.UI.homepage.heroBanner?.button?._default?.background?.[1] || 'blue.600',
+      config.UI.homepage.heroBanner?.button?._default?.background?.[1] || colors.white, // 'blue.600',
     )(props),
     color: mode(
       config.UI.homepage.heroBanner?.button?._default?.text_color?.[0] || 'white',
-      config.UI.homepage.heroBanner?.button?._default?.text_color?.[1] || 'white',
+      config.UI.homepage.heroBanner?.button?._default?.text_color?.[1] || colors.grayTrue[900], //'white',
     )(props),
     _hover: {
       bg: mode(
         config.UI.homepage.heroBanner?.button?._hover?.background?.[0] || 'blue.400',
-        config.UI.homepage.heroBanner?.button?._hover?.background?.[1] || 'blue.400',
+        config.UI.homepage.heroBanner?.button?._hover?.background?.[1] || colors.grayTrue[50], // 'blue.400',
       )(props),
       color: mode(
         config.UI.homepage.heroBanner?.button?._hover?.text_color?.[0] || 'white',
-        config.UI.homepage.heroBanner?.button?._hover?.text_color?.[1] || 'white',
+        config.UI.homepage.heroBanner?.button?._hover?.text_color?.[1] || colors.grayTrue[900], //'white',
       )(props),
     },
     '&[data-selected=true]': {
       bg: mode(
         config.UI.homepage.heroBanner?.button?._selected?.background?.[0] || 'blue.50',
-        config.UI.homepage.heroBanner?.button?._selected?.background?.[1] || 'blue.50',
+        config.UI.homepage.heroBanner?.button?._selected?.background?.[1] || colors.white, // 'blue.50',
       )(props),
       color: mode(
         config.UI.homepage.heroBanner?.button?._selected?.text_color?.[0] || 'blackAlpha.800',
-        config.UI.homepage.heroBanner?.button?._selected?.text_color?.[1] || 'blackAlpha.800',
+        config.UI.homepage.heroBanner?.button?._selected?.text_color?.[1] || colors.grayTrue[900], // 'blackAlpha.800',
       )(props),
     },
   };
@@ -191,23 +207,23 @@ const variantHeader = defineStyle((props) => {
 
   return {
     bgColor: 'transparent',
-    color: mode('blackAlpha.800', 'gray.400')(props),
-    borderColor: mode('gray.300', 'gray.600')(props),
+    color: mode('blackAlpha.800', colors.grayTrue[200])(props),
+    borderColor: mode('gray.300', colors.grayTrue[200])(props),
     borderWidth: props.borderWidth || '2px',
     borderStyle: 'solid',
     _hover: {
-      color: 'link_hovered',
-      borderColor: 'link_hovered',
+      color: 'white',
+      borderColor: 'white',
     },
     '&[data-selected=true]': {
-      bgColor: mode('blackAlpha.50', 'whiteAlpha.100')(props),
-      color: mode('blackAlpha.800', 'whiteAlpha.800')(props),
+      bgColor: mode('blackAlpha.50', colors.grayTrue[800])(props),
+      color: mode('blackAlpha.800', colors.grayTrue[200])(props),
       borderColor: 'transparent',
       borderWidth: props.borderWidth || '0px',
     },
     '&[data-selected=true][data-warning=true]': {
-      bgColor: mode('orange.100', 'orange.900')(props),
-      color: mode('blackAlpha.800', 'whiteAlpha.800')(props),
+      bgColor: mode('orange.100', colors.orangeDark[900])(props),
+      color: mode('blackAlpha.800', colors.orangeDark[200])(props),
       borderColor: 'transparent',
       borderWidth: props.borderWidth || '0px',
     },

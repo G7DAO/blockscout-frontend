@@ -1,6 +1,7 @@
 import { IconButton, Tooltip, useClipboard, chakra, useDisclosure, Skeleton, useColorModeValue } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
+import colors from 'theme/foundations/colors';
 import type { IconName } from 'ui/shared/IconSvg';
 import IconSvg from 'ui/shared/IconSvg';
 
@@ -21,7 +22,7 @@ const CopyToClipboard = ({ text, className, isLoading, onClick, size = 5, type, 
   const [ copied, setCopied ] = useState(false);
   // have to implement controlled tooltip because of the issue - https://github.com/chakra-ui/chakra-ui/issues/7107
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const iconColor = useColorModeValue('gray.400', 'gray.500');
+  const iconColor = useColorModeValue('gray.400', colors.grayTrue[200]);
   const colorProps = colorScheme ? {} : { color: iconColor };
   const iconName = icon || (type === 'link' ? 'link' : 'copy');
 

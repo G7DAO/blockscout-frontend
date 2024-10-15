@@ -12,6 +12,7 @@ import getBlockTotalReward from 'lib/block/getBlockTotalReward';
 import { WEI } from 'lib/consts';
 import getNetworkValidatorTitle from 'lib/networks/getNetworkValidatorTitle';
 import { currencyUnits } from 'lib/units';
+import colors from 'theme/foundations/colors';
 import BlockGasUsed from 'ui/shared/block/BlockGasUsed';
 import AddressEntity from 'ui/shared/entities/address/AddressEntity';
 import BlockEntity from 'ui/shared/entities/block/BlockEntity';
@@ -115,7 +116,7 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
           <Text fontWeight={ 500 }>Burnt fees</Text>
           <Flex columnGap={ 4 } mt={ 2 }>
             <Flex>
-              <IconSvg name="flame" boxSize={ 5 } color="gray.500" isLoading={ isLoading }/>
+              <IconSvg name="flame" boxSize={ 5 } color={ colors.grayTrue[200] } isLoading={ isLoading }/>
               <Skeleton isLoaded={ !isLoading } display="inline-block" color="text_secondary" ml={ 2 }>
                 <span>{ burntFees.div(WEI).toFixed() }</span>
               </Skeleton>

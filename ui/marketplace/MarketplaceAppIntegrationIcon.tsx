@@ -1,6 +1,7 @@
 import { Tooltip } from '@chakra-ui/react';
 import React from 'react';
 
+import colors from 'theme/foundations/colors';
 import type { IconName } from 'ui/shared/IconSvg';
 import IconSvg from 'ui/shared/IconSvg';
 
@@ -12,7 +13,7 @@ type Props = {
 const MarketplaceAppIntegrationIcon = ({ external, internalWallet }: Props) => {
   const [ icon, iconColor, text, boxSize ] = React.useMemo(() => {
     let icon: IconName = 'integration/partial';
-    let color = 'gray.400';
+    let color = colors.grayTrue[200];
     let text = 'This app opens in Blockscout without Blockscout wallet functionality. Use your external web3 wallet to connect directly to this application';
     let boxSize = 5;
 
@@ -23,7 +24,7 @@ const MarketplaceAppIntegrationIcon = ({ external, internalWallet }: Props) => {
       boxSize = 4;
     } else if (internalWallet) {
       icon = 'integration/full';
-      color = 'green.500';
+      color = colors.success[500]; //'green.500'
       text = 'This app opens in Blockscout and your Blockscout wallet connects automatically';
     }
 

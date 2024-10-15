@@ -8,10 +8,10 @@ import { route } from 'nextjs-routes';
 import useApiQuery from 'lib/api/useApiQuery';
 import { nbsp } from 'lib/html-entities';
 import { HOMEPAGE_STATS } from 'stubs/stats';
+import colors from 'theme/foundations/colors';
 import IconSvg from 'ui/shared/IconSvg';
 import LinkInternal from 'ui/shared/links/LinkInternal';
 import Pagination from 'ui/shared/pagination/Pagination';
-
 interface Props {
   pagination: PaginationParams;
 }
@@ -30,7 +30,7 @@ const BlocksTabSlot = ({ pagination }: Props) => {
           <Text as="span" fontSize="sm">
               Network utilization (last 50 blocks):{ nbsp }
           </Text>
-          <Skeleton display="inline-block" fontSize="sm" color="blue.400" fontWeight={ 600 } isLoaded={ !statsQuery.isPlaceholderData }>
+          <Skeleton display="inline-block" fontSize="sm" color={ colors.warning[300] } fontWeight={ 600 } isLoaded={ !statsQuery.isPlaceholderData }>
             <span>{ statsQuery.data.network_utilization_percentage.toFixed(2) }%</span>
           </Skeleton>
         </Box>

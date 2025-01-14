@@ -6,6 +6,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
+import colors from 'theme/foundations/colors';
 import IconSvg from 'ui/shared/IconSvg';
 
 interface Props {
@@ -17,7 +18,7 @@ interface Props {
 
 const AdditionalInfoButton = ({ isOpen, onClick, className, isLoading }: Props, ref: React.ForwardedRef<HTMLButtonElement>) => {
 
-  const infoBgColor = useColorModeValue('blue.50', 'gray.600');
+  const infoBgColor = useColorModeValue('blue.50', colors.grayTrue[700]); //'gray.600'
 
   if (isLoading) {
     return <Skeleton boxSize={ 6 } borderRadius="sm" flexShrink={ 0 }/>;
@@ -42,8 +43,8 @@ const AdditionalInfoButton = ({ isOpen, onClick, className, isLoading }: Props, 
       <IconSvg
         name="info"
         boxSize={ 5 }
-        color={ isOpen ? 'link_hovered' : 'icon_info' }
-        _hover={{ color: 'link_hovered' }}
+        color={ isOpen ? 'white' : colors.grayTrue[200] } //{ isOpen ? 'white' : 'icon_info' }
+        _hover={{ color: 'white' }}
       />
     </Button>
   );

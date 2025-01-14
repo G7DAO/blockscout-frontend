@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import React from 'react';
 
 import { HEX_REGEXP } from 'lib/regexp';
+import colors from 'theme/foundations/colors';
 import Popover from 'ui/shared/chakra/Popover';
 import TokenEntity from 'ui/shared/entities/token/TokenEntity';
 import IconSvg from 'ui/shared/IconSvg';
@@ -76,7 +77,7 @@ const NovesActionSnippet: FC<Props> = ({ item, isLoaded }) => {
                 height="5"
                 width="5"
                 color="gray.500"
-                _dark={{ color: 'gray.400' }}
+                _dark={{ color: colors.grayTrue[200] }}
               />
               <Text fontWeight="700" >
                 { item.action.label }

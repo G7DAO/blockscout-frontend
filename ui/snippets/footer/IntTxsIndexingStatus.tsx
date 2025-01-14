@@ -9,6 +9,7 @@ import useApiQuery, { getResourceKey } from 'lib/api/useApiQuery';
 import { apos, nbsp, ndash } from 'lib/html-entities';
 import useSocketChannel from 'lib/socket/useSocketChannel';
 import useSocketMessage from 'lib/socket/useSocketMessage';
+import colors from 'theme/foundations/colors';
 import Popover from 'ui/shared/chakra/Popover';
 import IconSvg from 'ui/shared/IconSvg';
 
@@ -67,8 +68,8 @@ const IntTxsIndexingStatus = () => {
       borderRadius="base"
       alignItems="center"
       justifyContent="center"
-      color="green.400"
-      _hover={{ color: 'blue.400' }}
+      color={ colors.success[500] } //"green.400"
+      _hover={{ color: colors.success[600] }}
     >
       <IconButton
         colorScheme="none"

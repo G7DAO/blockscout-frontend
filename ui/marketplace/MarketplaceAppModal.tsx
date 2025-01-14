@@ -12,6 +12,7 @@ import useIsMobile from 'lib/hooks/useIsMobile';
 import { nbsp } from 'lib/html-entities';
 import isBrowser from 'lib/isBrowser';
 import * as mixpanel from 'lib/mixpanel/index';
+import colors from 'theme/foundations/colors';
 import CopyToClipboard from 'ui/shared/CopyToClipboard';
 import type { IconName } from 'ui/shared/IconSvg';
 import IconSvg from 'ui/shared/IconSvg';
@@ -245,7 +246,7 @@ const MarketplaceAppModal = ({
               mb={ 6 }
             >
               <Flex alignItems="center" gap={ 2 } flexWrap="wrap">
-                <IconSvg name="contracts/verified_many" boxSize={ 5 } color="green.500"/>
+                <IconSvg name="contracts/verified_many" boxSize={ 5 } color={ colors.success[500] }/>
                 <Text>Verified contracts</Text>
                 <Text fontWeight="500">
                   { securityReport?.overallInfo.verifiedNumber ?? 0 } of { securityReport?.overallInfo.totalContractsNumber ?? 0 }

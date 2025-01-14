@@ -6,6 +6,7 @@ import type { MarketplaceAppWithSecurityReport, ContractListTypes, AppRating } f
 
 import useIsMobile from 'lib/hooks/useIsMobile';
 import isBrowser from 'lib/isBrowser';
+import colors from 'theme/foundations/colors';
 import CopyToClipboard from 'ui/shared/CopyToClipboard';
 
 import AppSecurityReport from './AppSecurityReport';
@@ -81,7 +82,7 @@ const MarketplaceAppCard = ({
       borderRadius="md"
       padding={{ base: 3, md: '20px' }}
       border="1px"
-      borderColor={ useColorModeValue('gray.200', 'gray.600') }
+      borderColor={ useColorModeValue('gray.200', colors.grayTrue[700]) }
       role="group"
     >
       <Flex

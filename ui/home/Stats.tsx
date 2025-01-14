@@ -93,7 +93,7 @@ const Stats = () => {
           flexShrink={ 0 }
           cursor="pointer"
           color="icon_info"
-          _hover={{ color: 'link_hovered' }}
+          _hover={{ color: 'white' }}
         />
       </GasInfoTooltip>
     ) : null;
@@ -190,7 +190,7 @@ const Stats = () => {
   return (
     <Grid
       gridTemplateColumns="1fr 1fr"
-      gridGap={{ base: 1, lg: 2 }}
+      gridGap={{ base: 1, lg: 4 }}
       flexBasis="50%"
       flexGrow={ 1 }
     >

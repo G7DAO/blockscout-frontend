@@ -2,6 +2,7 @@ import { Box, Flex, Text, Grid, useColorModeValue, chakra } from '@chakra-ui/rea
 import React from 'react';
 
 import type { SolidityScanReportSeverityDistribution } from 'lib/solidityScan/schema';
+import colors from 'theme/foundations/colors';
 
 type DistributionItem = {
   id: keyof SolidityScanReportSeverityDistribution;
@@ -31,7 +32,7 @@ type ItemProps = {
 
 const SolidityScanReportItem = ({ item, vulnerabilities, vulnerabilitiesCount }: ItemProps) => {
   const bgBar = useColorModeValue('blackAlpha.50', 'whiteAlpha.50');
-  const yetAnotherGrayColor = useColorModeValue('gray.400', 'gray.500');
+  const yetAnotherGrayColor = useColorModeValue('gray.400', colors.grayTrue[300]);//'gray.500');
   const vulnerability = vulnerabilities[item.id];
 
   if (vulnerability === undefined) {

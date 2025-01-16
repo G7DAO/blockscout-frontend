@@ -1,7 +1,8 @@
 import type { As } from '@chakra-ui/react';
-import { Skeleton, Box, Button, Circle, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, Circle, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 
+import Skeleton from 'ui/shared/chakra/Skeleton';
 import colors from 'theme/foundations/colors';
 import IconSvg from 'ui/shared/IconSvg';
 

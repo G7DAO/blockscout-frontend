@@ -1,10 +1,7 @@
-import { Image, Skeleton, Text, Flex } from '@chakra-ui/react';
-import _capitalize from 'lodash/capitalize';
+import { Text, Flex } from '@chakra-ui/react';
 import React from 'react';
 
 import type { Address } from 'types/api/address';
-
-import { route } from 'nextjs-routes';
 
 import config from 'configs/app';
 import getCurrencyValue from 'lib/getCurrencyValue';
@@ -12,12 +9,12 @@ import * as mixpanel from 'lib/mixpanel/index';
 import colors from 'theme/foundations/colors';
 import LinkExternal from 'ui/shared/links/LinkExternal';
 import LinkInternal from 'ui/shared/links/LinkInternal';
+import Skeleton from 'ui/shared/chakra/Skeleton';
 import TextSeparator from 'ui/shared/TextSeparator';
 
 import { getTokensTotalInfo } from '../utils/tokenUtils';
 import useFetchTokens from '../utils/useFetchTokens';
-
-const TEMPLATE_ADDRESS = '{address}';
+import AddressMultichainButton from './AddressMultichainButton';
 
 const multichainFeature = config.features.multichainButton;
 
@@ -25,7 +22,7 @@ type Props = {
   addressHash: string;
   addressData?: Address;
   isLoading?: boolean;
-}
+};
 
 const AddressNetWorth = ({ addressData, isLoading, addressHash }: Props) => {
   const { data, isError, isPending } = useFetchTokens({ hash: addressData?.hash, enabled: addressData?.has_tokens });
@@ -47,15 +44,29 @@ const AddressNetWorth = ({ addressData, isLoading, addressHash }: Props) => {
     mixpanel.logEvent(mixpanel.EventTypes.BUTTON_CLICK, { Content: 'Multichain', Source: 'address' });
   }, []);
 
-  let multichainItem = null;
+  let multichainItems = null;
 
   if (multichainFeature.isEnabled && !addressData?.is_contract) {
-    const buttonContent = (
+    const { providers } = multichainFeature;
+    const hasSingleProvider = providers.length === 1;
+
+    multichainItems = (
       <>
-        { multichainFeature.logoUrl &&
-          <Image src={ multichainFeature.logoUrl } alt={ multichainFeature.name } boxSize={ 5 } mr={ 2 } borderRadius="4px" overflow="hidden"/>
-        }
-        { _capitalize(multichainFeature.name) }</>
+        <TextSeparator mx={ 0 } color="gray.500"/>
+        <Flex alignItems="center" gap={ 2 }>
+          <Text>Multichain</Text>
+          { providers.map((item) => (
+            <AddressMultichainButton
+              key={ item.name }
+              item={ item }
+              addressHash={ addressHash }
+              onClick={ onMultichainClick }
+              hasSingleProvider={ hasSingleProvider }
+            />
+          ))
+          }
+        </Flex>
+      </>
     );
 
     const linkProps = {
@@ -106,7 +117,7 @@ const AddressNetWorth = ({ addressData, isLoading, addressHash }: Props) => {
       <Text>
         { (isError || !addressData?.exchange_rate) ? 'N/A' : `${ prefix }$${ totalUsd.toFormat(2) }` }
       </Text>
-      { multichainItem }
+      { multichainItems }
     </Skeleton>
   );
 };

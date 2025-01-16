@@ -1,9 +1,10 @@
-import { Box, Flex, Text, Skeleton, useColorModeValue, chakra } from '@chakra-ui/react';
+import { Box, Flex, Text, useColorModeValue, chakra } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 
 import type { Route } from 'nextjs-routes';
 
+import Skeleton from 'ui/shared/chakra/Skeleton';
 import colors from 'theme/foundations/colors';
 import Hint from 'ui/shared/Hint';
 import IconSvg, { type IconName } from 'ui/shared/IconSvg';
@@ -23,9 +24,9 @@ export type Props = {
   period?: '1h' | '24h';
   href?: Route;
   icon?: IconName;
-}
+};
 
-const Container = ({ href, children }: { href?: Route; children: JSX.Element }) => {
+const Container = ({ href, children }: { href?: Route; children: React.JSX.Element }) => {
   if (href) {
     return (
       <NextLink href={ href } passHref legacyBehavior>

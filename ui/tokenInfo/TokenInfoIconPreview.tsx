@@ -1,4 +1,4 @@
-import { Center, Image, Skeleton, useColorModeValue } from '@chakra-ui/react';
+import { Center, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 
 import colors from 'theme/foundations/colors';
@@ -6,9 +6,8 @@ import TokenLogoPlaceholder from 'ui/shared/TokenLogoPlaceholder';
 
 interface Props {
   url: string | undefined;
-  onLoad?: () => void;
-  onError?: () => void;
   isInvalid: boolean;
+  children: React.ReactElement;
 }
 
 const TokenInfoIconPreview = ({ url, onError, onLoad, isInvalid }: Props) => {
@@ -25,16 +24,7 @@ const TokenInfoIconPreview = ({ url, onError, onLoad, isInvalid }: Props) => {
       borderColor={ url ? borderColorActive : borderColor }
       borderRadius="base"
     >
-      <Image
-        borderRadius="base"
-        src={ url }
-        alt="Token logo preview"
-        boxSize={{ base: 10, lg: 12 }}
-        objectFit="cover"
-        fallback={ url && !isInvalid ? <Skeleton boxSize={{ base: 10, lg: 12 }}/> : <TokenLogoPlaceholder boxSize={{ base: 10, lg: 12 }}/> }
-        onError={ onError }
-        onLoad={ onLoad }
-      />
+      { children }
     </Center>
   );
 };

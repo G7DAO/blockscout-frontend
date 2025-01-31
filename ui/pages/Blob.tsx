@@ -6,7 +6,7 @@ import throwOnResourceLoadError from 'lib/errors/throwOnResourceLoadError';
 import getQueryParamString from 'lib/router/getQueryParamString';
 import { BLOB } from 'stubs/blobs';
 import BlobInfo from 'ui/blob/BlobInfo';
-import TextAd from 'ui/shared/ad/TextAd';
+// import TextAd from 'ui/shared/ad/TextAd';
 import isCustomAppError from 'ui/shared/AppError/isCustomAppError';
 import DataFetchAlert from 'ui/shared/DataFetchAlert';
 import BlobEntity from 'ui/shared/entities/blob/BlobEntity';
@@ -46,7 +46,7 @@ const BlobPageContent = () => {
 
   return (
     <>
-      <TextAd mb={ 6 }/>
+      { /* <TextAd mb={ 6 }/> */ }
       <PageTitle
         title="Blob details"
         secondRow={ titleSecondRow }

@@ -12,7 +12,7 @@ import useIsMobile from 'lib/hooks/useIsMobile';
 import * as regexp from 'lib/regexp';
 import colors from 'theme/foundations/colors';
 import useMarketplaceApps from 'ui/marketplace/useMarketplaceApps';
-import TextAd from 'ui/shared/ad/TextAd';
+// import TextAd from 'ui/shared/ad/TextAd';
 import ContentLoader from 'ui/shared/ContentLoader';
 import type { ApiCategory, ItemsCategoriesMap } from 'ui/shared/search/utils';
 import { getItemCategory, searchCategories } from 'ui/shared/search/utils';
@@ -194,7 +194,7 @@ const SearchBarSuggest = ({ query, searchTerm, onItemClick, containerId }: Props
     <Box mt={ 5 } mb={ 5 }>
       { !isMobile && (
         <Box pb={ 4 } mb={ 5 } borderColor="divider" borderBottomWidth="1px" _empty={{ display: 'none' }}>
-          <TextAd/>
+          { /* <TextAd/> */ }
         </Box>
       ) }
       { content }

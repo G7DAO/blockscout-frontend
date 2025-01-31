@@ -19,7 +19,7 @@ import useSocketMessage from 'lib/socket/useSocketMessage';
 import useFetchXStarScore from 'lib/xStarScore/useFetchXStarScore';
 import { ADDRESS_TABS_COUNTERS } from 'stubs/address';
 import { USER_OPS_ACCOUNT } from 'stubs/userOps';
-import colors from 'theme/foundations/colors';
+// import colors from 'theme/foundations/colors';
 import AddressAccountHistory from 'ui/address/AddressAccountHistory';
 import AddressBlocksValidated from 'ui/address/AddressBlocksValidated';
 import AddressCoinBalance from 'ui/address/AddressCoinBalance';
@@ -240,16 +240,18 @@ const AddressPageContent = () => {
       addressQuery.data?.is_contract ? {
         id: 'contract',
         title: () => {
+          const tabName = addressQuery.data.proxy_type === 'eip7702' ? 'Code' : 'Contract';
+
           if (addressQuery.data.is_verified) {
             return (
               <>
-                <span>Contract</span>
-                <IconSvg name="status/success" boxSize="14px" color={ colors.success[500] } ml={ 1 }/>
+                <span>{ tabName }</span>
+                <IconSvg name="status/success" boxSize="14px" color="green.500" ml={ 1 }/>
               </>
             );
           }
 
-          return 'Contract';
+          return tabName;
         },
         component: (
           <AddressContract
@@ -280,7 +282,12 @@ const AddressPageContent = () => {
       config.features.validators.isEnabled && addressQuery.data?.has_validated_blocks ?
         { slug: 'validator', name: 'Validator', tagType: 'custom' as const, ordinal: PREDEFINED_TAG_PRIORITY } :
         undefined,
-      addressQuery.data?.implementations?.length ? { slug: 'proxy', name: 'Proxy', tagType: 'custom' as const, ordinal: PREDEFINED_TAG_PRIORITY } : undefined,
+      addressQuery.data?.implementations?.length && addressQuery.data?.proxy_type !== 'eip7702' ?
+        { slug: 'proxy', name: 'Proxy', tagType: 'custom' as const, ordinal: PREDEFINED_TAG_PRIORITY } :
+        undefined,
+      addressQuery.data?.implementations?.length && addressQuery.data?.proxy_type === 'eip7702' ?
+        { slug: 'eip7702', name: 'EOA+code', tagType: 'custom' as const, ordinal: PREDEFINED_TAG_PRIORITY } :
+        undefined,
       addressQuery.data?.token ? { slug: 'token', name: 'Token', tagType: 'custom' as const, ordinal: PREDEFINED_TAG_PRIORITY } : undefined,
       isSafeAddress ? { slug: 'safe', name: 'Multisig: Safe', tagType: 'custom' as const, ordinal: -10 } : undefined,
       addressProfileAPIFeature.isEnabled && usernameApiTag ? {
@@ -418,7 +425,7 @@ const AddressPageContent = () => {
     <>
       { /* <TextAd mb={ 6 }/> */ }
       <PageTitle
-        title={ `${ addressQuery.data?.is_contract ? 'Contract' : 'Address' } details` }
+        title={ `${ addressQuery.data?.is_contract && addressQuery.data?.proxy_type !== 'eip7702' ? 'Contract' : 'Address' } details` }
         backLink={ backLink }
         contentAfter={ titleContentAfter }
         secondRow={ titleSecondRow }

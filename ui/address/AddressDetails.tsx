@@ -169,6 +169,7 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
           <AddressImplementations
             data={ data.implementations }
             isLoading={ addressQuery.isPlaceholderData }
+            proxyType={ data.proxy_type }
           />
         ) }
 

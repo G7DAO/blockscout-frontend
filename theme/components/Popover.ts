@@ -20,7 +20,7 @@ const baseStylePopper = defineStyle({
 });
 
 const baseStyleContent = defineStyle((props) => {
-  const bg = mode('white', colors.grayTrue[800])(props); //'gray.900'
+  const bg = colors.grayTrue[800]; //'gray.900'
   const shadowColor = mode('blackAlpha.200', 'whiteAlpha.300')(props);
 
   return {

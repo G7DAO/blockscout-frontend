@@ -1,4 +1,4 @@
-import { chakra, Flex, Grid, Image, Box, Text, useColorMode, Tag } from '@chakra-ui/react';
+import { chakra, Flex, Grid, Image, Box, Text, Tag } from '@chakra-ui/react';
 import React from 'react';
 import xss from 'xss';
 
@@ -48,8 +48,6 @@ const SearchResultListItem = ({ data, searchTerm, isLoading, addressFormat }: Pr
       'Result URL': e.currentTarget.href,
     });
   }, [ searchTerm ]);
-
-  const { colorMode } = useColorMode();
 
   const firstRow = (() => {
     switch (data.type) {
@@ -143,7 +141,7 @@ const SearchResultListItem = ({ data, searchTerm, isLoading, addressFormat }: Pr
               borderRadius="base"
               boxSize={ 6 }
               mr={ 2 }
-              src={ colorMode === 'dark' && data.app.logoDarkMode ? data.app.logoDarkMode : data.app.logo }
+              src={ data.app.logoDarkMode }
               alt={ `${ data.app.title } app icon` }
             />
             { data.app.external ? (
